@@ -1,0 +1,73 @@
+{
+  "docket": "2026-03050",
+  "docket_short": "26-03050",
+  "watch_ids": [
+    "atty-firm"
+  ],
+  "appellant": {
+    "first_name": "Ingrid",
+    "last_name": "Solberg"
+  },
+  "property": {
+    "pins": [
+      "05-27-401-008"
+    ],
+    "county": "DuPage",
+    "township": "Milton",
+    "type": "R",
+    "class": "1"
+  },
+  "attorney": {
+    "first_name": "Ana",
+    "last_name": "Ruiz",
+    "firm_name": "Ruiz Property Tax Group"
+  },
+  "values": {
+    "bor": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 318900
+    },
+    "appellant": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 265000
+    },
+    "ptab": {
+      "total": null
+    }
+  },
+  "status": {
+    "county_status": "Pending",
+    "decision_type": null,
+    "hearing_status": "Not Set",
+    "close_date": null,
+    "reason_closed": null
+  },
+  "hearing": {
+    "datetime": null,
+    "location": null
+  },
+  "case_history": [
+    {
+      "transaction_date": "2026-07-28",
+      "description": "Appellant new appeal received",
+      "letter_date": "2026-07-24"
+    }
+  ],
+  "decision_pdf": null,
+  "bor_decision": {
+    "notice_date": "2026-07-24",
+    "township_transmit_date": null,
+    "source": "BOR notice (entered by staff)"
+  },
+  "source_urls": {
+    "docket": "https://ptab.illinois.gov/asi/property.asp?docketno=26-03050",
+    "details": "https://ptab.illinois.gov/asi/PropertyDetails.asp?proppin=05-27-401-008&docketno=2026-03050-001"
+  },
+  "observed_at": "2026-08-03T09:02:00Z"
+}

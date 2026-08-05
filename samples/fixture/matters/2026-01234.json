@@ -1,0 +1,88 @@
+{
+  "docket": "2026-01234",
+  "docket_short": "26-01234",
+  "watch_ids": [
+    "atty-firm"
+  ],
+  "appellant": {
+    "first_name": "Marguerite",
+    "last_name": "Delacroix"
+  },
+  "property": {
+    "pins": [
+      "14-21-106-017-1004"
+    ],
+    "county": "Cook",
+    "township": "Lake View",
+    "type": "R",
+    "class": "1"
+  },
+  "attorney": {
+    "first_name": "Ana",
+    "last_name": "Ruiz",
+    "firm_name": "Ruiz Property Tax Group"
+  },
+  "values": {
+    "bor": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 398000
+    },
+    "appellant": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 288000
+    },
+    "ptab": {
+      "total": null
+    }
+  },
+  "status": {
+    "county_status": "Ready",
+    "decision_type": "Hearing",
+    "hearing_status": "Hearing Set",
+    "close_date": null,
+    "reason_closed": null
+  },
+  "hearing": {
+    "datetime": "2026-10-08T09:00:00",
+    "location": null
+  },
+  "case_history": [
+    {
+      "transaction_date": "2026-04-14",
+      "description": "Appellant new appeal received",
+      "letter_date": "2026-04-10"
+    },
+    {
+      "transaction_date": "2026-05-02",
+      "description": "An acknowledgment letter was sent along with a 60 day extension",
+      "letter_date": "2026-05-02"
+    },
+    {
+      "transaction_date": "2026-07-29",
+      "description": "Possible stipulation received from County",
+      "letter_date": "2026-07-29"
+    },
+    {
+      "transaction_date": "2026-07-31",
+      "description": "Hearing Scheduled (Click on Property PIN number below for details)",
+      "letter_date": "2026-08-01"
+    }
+  ],
+  "decision_pdf": null,
+  "bor_decision": {
+    "notice_date": "2026-07-15",
+    "township_transmit_date": null,
+    "source": "BOR notice (entered by staff)"
+  },
+  "source_urls": {
+    "docket": "https://ptab.illinois.gov/asi/property.asp?docketno=26-01234",
+    "details": "https://ptab.illinois.gov/asi/PropertyDetails.asp?proppin=14-21-106-017-1004&docketno=2026-01234-001"
+  },
+  "observed_at": "2026-08-03T09:02:00Z"
+}

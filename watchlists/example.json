@@ -1,0 +1,58 @@
+{
+  "firm_slug": "example",
+  "firm_name": "Example & Associates",
+  "watches": [
+    {
+      "id": "atty-example",
+      "kind": "attorney",
+      "attorney_last_name": "",
+      "firm_name": "",
+      "status": "O",
+      "max_pages": 20,
+      "note": "The firm's own docket. Highest-signal watch — start here."
+    },
+    {
+      "id": "pin-example",
+      "kind": "pin",
+      "pin": "",
+      "note": "One parcel. Catches filings made by anyone, including opposing counsel."
+    },
+    {
+      "id": "county-year-example",
+      "kind": "county_year",
+      "county": "",
+      "tax_year": 2025,
+      "status": "O",
+      "max_pages": 40,
+      "note": "Firehose. Cook + a single tax year with status A returned 39,126 records in 2021 — keep status O and add a township."
+    },
+    {
+      "id": "owner-example",
+      "kind": "owner",
+      "last_name": "",
+      "first_name": "",
+      "county": "",
+      "status": "A",
+      "note": "Taxpayer name. Useful for entities that hold several parcels."
+    },
+    {
+      "id": "docket-example",
+      "kind": "docket",
+      "docket": "",
+      "note": "A single known matter, hydrated directly with no list query."
+    }
+  ],
+  "county_factors": {
+    "": {
+      "equalization_factor": null,
+      "composite_rate": null,
+      "source_year": null,
+      "source": "IDOR final multiplier + county clerk composite rate — update annually"
+    }
+  },
+  "thresholds": {
+    "min_gap_dollars": 5000,
+    "min_gap_percent": 5
+  },
+  "created_at": ""
+}

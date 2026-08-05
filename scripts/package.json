@@ -1,0 +1,9 @@
+{
+  "name": "monitoring-tax-appeals-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic helpers for the monitoring-tax-appeals skill. No dependencies — Node 18+ only.",
+  "engines": {
+    "node": ">=18"
+  }
+}

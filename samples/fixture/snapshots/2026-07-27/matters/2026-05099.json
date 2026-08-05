@@ -1,0 +1,73 @@
+{
+  "docket": "2026-05099",
+  "docket_short": "26-05099",
+  "watch_ids": [
+    "atty-firm"
+  ],
+  "appellant": {
+    "first_name": "Desmond",
+    "last_name": "Achterberg"
+  },
+  "property": {
+    "pins": [
+      "08-16-402-011-0000"
+    ],
+    "county": "Lake",
+    "township": "Waukegan",
+    "type": "R",
+    "class": "1"
+  },
+  "attorney": {
+    "first_name": "Ana",
+    "last_name": "Ruiz",
+    "firm_name": "Ruiz Property Tax Group"
+  },
+  "values": {
+    "bor": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 233400
+    },
+    "appellant": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 198000
+    },
+    "ptab": {
+      "total": null
+    }
+  },
+  "status": {
+    "county_status": "Pending",
+    "decision_type": null,
+    "hearing_status": "Not Set",
+    "close_date": null,
+    "reason_closed": null
+  },
+  "hearing": {
+    "datetime": null,
+    "location": null
+  },
+  "case_history": [
+    {
+      "transaction_date": "2026-05-20",
+      "description": "Appellant new appeal received",
+      "letter_date": "2026-05-18"
+    }
+  ],
+  "decision_pdf": null,
+  "bor_decision": {
+    "notice_date": null,
+    "township_transmit_date": null,
+    "source": null
+  },
+  "source_urls": {
+    "docket": "https://ptab.illinois.gov/asi/property.asp?docketno=26-05099",
+    "details": "https://ptab.illinois.gov/asi/PropertyDetails.asp?proppin=08-16-402-011-0000&docketno=2026-05099-001"
+  },
+  "observed_at": "2026-08-03T09:02:00Z"
+}

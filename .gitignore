@@ -1,0 +1,26 @@
+node_modules/
+.DS_Store
+*.log
+
+# Live workspace output at the repo root — never commit client matter data
+/ptab/
+/matters/
+/snapshots/
+/decisions/
+/ledger.jsonl
+/alerts.json
+/digest.html
+/digest_summary.json
+/matters.csv
+
+# Generated when the offline fixture is run in place
+/samples/fixture/ledger.jsonl
+/samples/fixture/alerts.json
+/samples/fixture/digest.html
+/samples/fixture/digest_summary.json
+/samples/fixture/matters.csv
+/samples/fixture/snapshots/2026-08-03/
+
+# Real watchlists name real clients; only the template is tracked
+/watchlists/*.json
+!/watchlists/example.json

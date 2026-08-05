@@ -1,0 +1,89 @@
+{
+  "docket": "2026-02001",
+  "docket_short": "26-02001",
+  "watch_ids": [
+    "atty-firm"
+  ],
+  "appellant": {
+    "first_name": "Harold",
+    "last_name": "Vance"
+  },
+  "property": {
+    "pins": [
+      "10-10-11-108-008"
+    ],
+    "county": "Tazewell",
+    "township": "Cincinnati",
+    "type": "R",
+    "class": "1"
+  },
+  "attorney": {
+    "first_name": "Ana",
+    "last_name": "Ruiz",
+    "firm_name": "Ruiz Property Tax Group"
+  },
+  "values": {
+    "bor": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 96500
+    },
+    "appellant": {
+      "land": null,
+      "improvements": null,
+      "farm_land": 0,
+      "farm_building": 0,
+      "total": 71000
+    },
+    "ptab": {
+      "total": 82250
+    }
+  },
+  "status": {
+    "county_status": "Closed",
+    "decision_type": "No Hearing",
+    "hearing_status": "Not Set",
+    "close_date": "2026-07-30",
+    "reason_closed": "Decision with Hearing"
+  },
+  "hearing": {
+    "datetime": null,
+    "location": null
+  },
+  "case_history": [
+    {
+      "transaction_date": "2026-03-03",
+      "description": "Appellant new appeal received",
+      "letter_date": "2026-02-27"
+    },
+    {
+      "transaction_date": "2026-06-11",
+      "description": "All evidence has been submitted / 30 day rebuttal period begins",
+      "letter_date": "2026-06-11"
+    },
+    {
+      "transaction_date": "2026-07-30",
+      "description": "Case closed on 7/30/2026. View Decision or click on Property PIN number below for details.",
+      "letter_date": "2026-07-30"
+    }
+  ],
+  "decision_pdf": {
+    "url": "https://ptab.illinois.gov/web/Decisions/2026/2026-02001.pdf",
+    "path": "decisions/2026-02001.pdf",
+    "bytes": 61204,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fetched_at": "2026-08-03T09:04:11Z"
+  },
+  "bor_decision": {
+    "notice_date": "2026-06-04",
+    "township_transmit_date": null,
+    "source": "BOR notice (entered by staff)"
+  },
+  "source_urls": {
+    "docket": "https://ptab.illinois.gov/asi/property.asp?docketno=26-02001",
+    "details": "https://ptab.illinois.gov/asi/PropertyDetails.asp?proppin=10-10-11-108-008&docketno=2026-02001-001"
+  },
+  "observed_at": "2026-08-03T09:02:00Z"
+}
