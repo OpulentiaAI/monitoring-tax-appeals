@@ -19,7 +19,7 @@ Rules that do not bend:
 
 - One request at a time. No `parallel_tasks`, no concurrent `agent_spawn`, no browser fan-out against `ptab.illinois.gov`.
 - ~2–3 seconds between requests. A sweep is a weekly job; there is no reason to hurry it.
-- `web_fetch`, not a browser session — ASI is server-rendered HTML.
+- A plain fetch, not a browser session — ASI is server-rendered HTML.
 - Write raw HTML to `snapshots/{date}/raw/{watch_id}_p{N}.html` **before** parsing. The fetch is the expensive, unrepeatable part.
 - Stop the sweep on the first 5xx or interstitial. Report a partial sweep with the watches that completed; do not retry into a struggling service.
 - Read `Results | 1 to 50 of N Records` before paginating. `N` over `max_pages × 50` means the watch is too broad — record the overflow in the digest rather than silently truncating.
@@ -88,7 +88,7 @@ COMPUTE per matter:
    "3 prior decisions in this township/class" is a fact; "PTAB favors appellants here" is not.
 
 RULES:
-- Bash only. ZERO fetches — no web_fetch, no browser, no search. Everything is on disk.
+- Shell only. Everything this step needs is already on disk.
 - Never estimate a missing input. Unknown is an output, and it is the right one.
 - Round currency to whole dollars. Show the arithmetic in a `computed_from` field so a human
   can check it without re-deriving it.

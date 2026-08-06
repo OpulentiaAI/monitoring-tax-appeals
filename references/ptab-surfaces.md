@@ -105,7 +105,7 @@ A 404 on a closed case means the decision is not posted yet. Record `decision_pd
 - Public state service. Sequential requests, ~2–3 seconds apart, one sweep per week.
 - Stop on the first 5xx or interstitial rather than retrying into it. Report the partial sweep.
 - Cache raw HTML under `snapshots/{date}/raw/`. Re-parse freely; re-fetch never.
-- The site is plain server-rendered HTML — `web_fetch` is correct. A browser session buys nothing here and costs a concurrency slot.
+- The site is plain server-rendered HTML, so a fetch is correct. A browser session buys nothing here and costs a concurrency slot.
 - **The eFiling portal is not a surface.** Attorney-represented appeals have gone through it since 2023-07-01, it is credentialed and captcha-protected, and this skill has no business there.
 
 ## Related sources

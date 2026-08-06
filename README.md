@@ -79,4 +79,4 @@ Dependency-free, Node 18+. [`samples/README.md`](samples/README.md) explains wha
 
 ## Provenance
 
-Structure and voice modeled on [browserbase/skills](https://github.com/browserbase/skills) — the step-numbered pipeline, hard tool-call caps, verbatim-evidence rules, and heredoc-batched subagent writes come from `event-prospecting` and `company-research`. Tool calls are written against Opulent's own `web_fetch` / `browser_*` surface. PTAB endpoint shapes were verified live on 2026-08-05; statutory citations are in [`references/deadlines-and-routing.md`](references/deadlines-and-routing.md).
+Structure and voice modeled on [browserbase/skills](https://github.com/browserbase/skills) — the step-numbered pipeline, hard tool-call caps, verbatim-evidence rules, and heredoc-batched subagent writes come from `event-prospecting` and `company-research`. Steps name the capability required rather than a specific tool. PTAB endpoint shapes were verified live on 2026-08-05; statutory citations are in [`references/deadlines-and-routing.md`](references/deadlines-and-routing.md).

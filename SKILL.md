@@ -20,7 +20,7 @@ This skill owns observation: what the public record says today, what changed sin
 
 ---
 
-## CRITICAL — The filing boundary
+## The filing boundary
 
 **Everything in this skill is read-only against public pages.** The line is absolute and it is drawn at `ptab.illinois.gov/efile/`.
 
@@ -31,7 +31,7 @@ This skill owns observation: what the public record says today, what changed sin
 
 Attorney-represented appeals have had to go through the eFiling portal since July 1, 2023. That is precisely the workflow this skill stays out of.
 
-## CRITICAL — Dates are computed, not relied on
+## Dates are computed, not relied on
 
 Every date this skill produces is a **computation from observed inputs**, and it is labeled that way.
 
@@ -41,17 +41,17 @@ Every date this skill produces is a **computation from observed inputs**, and it
 - Cook matter with only the notice leg → `basis: "partial"`, the conservative earlier date, and the missing input named. Never let a partial computation present as a confirmed deadline.
 - Nothing here is legal advice. Routing recommendations carry their evidence so an attorney can disagree with them quickly.
 
-## CRITICAL — Sweep discipline
+## Sweep discipline
 
 ASI is a public service run by a state agency, not an API.
 
-- **One sweep per week, sequential.** No parallel fan-out across watches. `browser_batch` for ordered steps inside a single session, never concurrent sessions against `ptab.illinois.gov`.
+- **One sweep per week, sequential.** Batch ordered steps inside a single session; keep one session at a time against `ptab.illinois.gov`.
 - **Pace requests** — roughly one every 2–3 seconds, and stop the sweep on the first 5xx or interstitial rather than retrying into it.
-- Most of ASI answers plain GETs, so prefer `web_fetch` over a browser session. Escalate to `browser_start` only for pages that need interaction.
+- ASI answers plain GETs, so fetch. Escalate to a browser session for pages that need interaction.
 - **Never re-fetch what has not changed.** The list query is cheap; the per-docket hydration is not. Hydrate only dockets whose list row changed, plus anything with an open deadline.
 - Cache every raw response under `snapshots/{date}/raw/`. The parse can be re-run; the fetch should not be.
 
-## CRITICAL — The ledger is append-only
+## The ledger is append-only
 
 `ledger.jsonl` is the audit trail, and it is the artifact that outlives the matter.
 
@@ -120,7 +120,7 @@ Build the query URLs deterministically — never hand-assemble them:
 node {SKILL_DIR}/scripts/ptab_urls.mjs {SKILL_DIR}/watchlists/${FIRM_SLUG}.json > "$WORKSPACE/snapshots/$TODAY/queries.jsonl"
 ```
 
-Then fetch each, sequentially, pacing between calls, writing raw HTML to `snapshots/{date}/raw/{watch_id}_p{N}.html`. Use `web_fetch` — these are plain GETs.
+Fetch each sequentially, pacing between calls, writing raw HTML to `snapshots/{date}/raw/{watch_id}_p{N}.html`.
 
 Result pages paginate at 50 rows with First/Prev/Next/Last links. Follow `Next` until it stops advancing or you hit the watch's `max_pages` (default 20). A watch returning tens of thousands of rows is a watch that is too broad — `references/ptab-surfaces.md` has the narrowing guidance.
 
@@ -216,7 +216,7 @@ Produces:
 - `alerts.json` — machine-readable deadline alerts for downstream notification
 - `matters.csv` — the full book of business, one row per matter
 
-Then surface the table with `create_spreadsheet_artifact` and post the summary:
+Then surface the table as an interactive artifact and post the summary:
 
 ```
 ## PTAB sweep — week of {date}
@@ -231,7 +231,7 @@ Then surface the table with `create_spreadsheet_artifact` and post the summary:
 
 Lead with the critical band. If a matter is inside 7 days, it goes at the top of the digest and into the first line of the chat summary — under it, everything else.
 
-For the recurring Monday run, register it as an Opulent automation (`automation_manage`) rather than a loop: weekly, Monday morning, with the digest delivered on completion. The sweep is idempotent — running it twice in a day produces zero new events and zero new ledger entries.
+Register the recurring Monday run as a scheduled automation rather than a loop: weekly, Monday morning, with the digest delivered on completion. The sweep is idempotent — running it twice in a day produces zero new events and zero new ledger entries.
 
 ---
 
