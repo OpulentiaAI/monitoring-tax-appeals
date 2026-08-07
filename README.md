@@ -55,7 +55,7 @@ monitoring-tax-appeals/
 ├── references/
 │   ├── ptab-surfaces.md                every endpoint, verified, with parsing traps and the case-history vocabulary
 │   ├── deadlines-and-routing.md        35 ILCS 200/16-160 both forms, day counting, holidays, BOR-vs-PTAB routing
-│   ├── workflow.md                     subagent prompts, hard call caps, wave sizing
+│   ├── workflow.md                     request budgets, pacing, sweep checks
 │   └── example-matter.md               matter, event, and alert record formats
 ├── samples/                            two-week fixture — runs the whole pipeline offline
 └── scripts/

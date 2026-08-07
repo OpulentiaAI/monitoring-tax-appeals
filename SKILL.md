@@ -106,7 +106,7 @@ Open on trigger.
 | --- | --- |
 | A parse fails or a phrase is unmapped | `references/ptab-surfaces.md` |
 | Any deadline or routing question | `references/deadlines-and-routing.md` |
-| Writing a subagent prompt | `references/workflow.md` |
+| Sizing or pacing a sweep | `references/workflow.md` |
 | A record's shape is unclear | `references/example-matter.md` |
 
 ## Failure modes
