@@ -24,3 +24,6 @@ node_modules/
 # Real watchlists name real clients; only the template is tracked
 /watchlists/*.json
 !/watchlists/example.json
+
+# Demo working directory
+/.run/

@@ -1,0 +1,15 @@
+{
+  "name": "monitoring-tax-appeals",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "demo": "rm -rf .run && cp -R samples/fixture .run && npm run diff && npm run deadlines && npm run digest",
+    "diff": "node scripts/detect_changes.mjs .run --snapshot 2026-08-03",
+    "deadlines": "node scripts/deadline_engine.mjs .run --today 2026-08-03",
+    "digest": "node scripts/compile_digest.mjs .run --today 2026-08-03",
+    "open": "node scripts/compile_digest.mjs .run --today 2026-08-03 --open",
+    "verify": "node scripts/detect_changes.mjs .run --verify",
+    "urls": "node scripts/ptab_urls.mjs"
+  }
+}
