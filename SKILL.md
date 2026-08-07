@@ -14,7 +14,7 @@ A watchlist in, a Monday digest out, with every deadline shown as a computation 
 npm run demo && npm run open
 ```
 
-**Live run:** stages 1 to 9 below.
+**Live run:** stages 1 to 10 below.
 
 ## Invariants
 
@@ -24,6 +24,7 @@ npm run demo && npm run open
 - No notice date means no deadline. There is no fallback trigger on the public record.
 - The ledger is append-only. A correction is a new entry. A broken chain stops the run.
 - One sweep per week, sequential, paced. Stop on the first 5xx or interstitial.
+- Pages and PDFs come through one browser session, reused across the sweep and released at the end, including on the failure path.
 - Read the summary and the digest, not the raw snapshots.
 
 ## Stages
@@ -50,22 +51,33 @@ Never hand-assemble a PTAB URL. The docket number has three forms and the builde
 *Done: one query per watch, empty watches rejected with reasons.*
 
 ### 4 · Sweep
-Fetch each query sequentially, two to three seconds apart, writing raw HTML to `snapshots/{date}/raw/`. Follow `Next` until it stops advancing or `max_pages`. Parse result tables into `rows.jsonl`.
+Open one browser session and hold it for the whole sweep. Per page, one `batch`: `navigate` to the query, then `get_content`, writing the HTML straight to `snapshots/{date}/raw/`. Sequential, two to three seconds apart. `click` the `Next Page` control until it stops advancing or `max_pages`. Parse result tables into `rows.jsonl`.
+
+Read the `Results | 1 to 50 of N Records` line before paginating. It tells you the watch is too broad while it is still cheap to narrow.
 
 Parse by column header, not position: the third column changes name when the query includes an attorney.
 
-*Done: `rows.jsonl` written, record counts recorded, nothing retried through a block.*
+*Done: `rows.jsonl` written, record counts recorded, session still open, nothing retried through a block.*
 
 ### 5 · Hydrate
 Only dockets whose row changed, plus anything with an open deadline. Two reads each: the docket page for parties and case history, the property page for values, hearing and status.
 
 Store case-history phrases **verbatim**. The phrasing is the evidence.
 
-Signed decisions live at a deterministic path by docket year. Fetch once, store with byte size and SHA-256, never re-fetch.
-
 *Done: one `matters/{docket}.json` per changed docket.*
 
-### 6 · Diff
+### 6 · Pull decisions
+On a closed docket, `click` the inline decision link on the close row, then `get_downloads` and write the bytes to `decisions/{docket}.pdf`. Construct the URL from `references/ptab-surfaces.md` only when the link is missing.
+
+Check the content type is `application/pdf` before hashing. An error page saved under a `.pdf` name hashes fine and tells you nothing.
+
+Once, ever. Record byte size and SHA-256 from the file on disk. A missing decision on a closed case is `decision_pdf: null` and next week's job.
+
+End the session here, before anything else runs.
+
+*Done: each new decision on disk with its size and hash, session released.*
+
+### 7 · Diff
 ```bash
 node scripts/detect_changes.mjs {WORKSPACE} --snapshot {date}
 ```
@@ -73,7 +85,7 @@ Emits typed events and appends each to the hash-chained ledger. Re-running the s
 
 *Done: event counts by type reported, ledger head printed.*
 
-### 7 · Deadlines
+### 8 · Deadlines
 ```bash
 node scripts/deadline_engine.mjs {WORKSPACE} --today {date}
 ```
@@ -83,14 +95,14 @@ Open `references/deadlines-and-routing.md` before changing anything here.
 
 *Done: `alerts.json` written, every entry carrying `verify: true`.*
 
-### 8 · Analyze and route
+### 9 · Analyze and route
 Assessment gap is BOR total minus appellant total. Tax exposure is an estimate with its inputs shown. Comparables are supplied or found, never invented.
 
 Routing recommends a BOR reconsideration or a PTAB challenge and carries the argument against itself. Inside 14 days, preserving the PTAB filing leads regardless of merits: a reconsideration does not toll the window.
 
 *Done: each open matter has a recommendation, its evidence, and its counter-evidence.*
 
-### 9 · Publish
+### 10 · Publish
 ```bash
 node scripts/compile_digest.mjs {WORKSPACE} --today {date}
 ```

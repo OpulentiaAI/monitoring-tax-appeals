@@ -32,7 +32,7 @@ Everything persists under `/opulent/workspace/ptab/{firm_slug}/` — the workspa
 | `ledger.jsonl` | The audit trail. Append-only, hash-chained, one entry per observation with its source URL and timestamp. `--verify` re-walks the chain and names the exact line if it breaks. |
 | `matters/{docket}.json` | Canonical state per matter — parties, property, values, status, hearing, verbatim case history, decision hash. |
 | `snapshots/{date}/` | That sweep's raw HTML, parsed rows, events, and a copy of matters as next week's baseline. Re-parse freely; re-fetch never. |
-| `decisions/{docket}.pdf` | Signed decisions, fetched once, stored with byte size and SHA-256. |
+| `decisions/{docket}.pdf` | Signed decisions, downloaded once through the browser session, stored with byte size and SHA-256. |
 | `digest_summary.json` | Counts and the leading matters, for the chat summary. |
 | Chat summary | Matters watched, events by type, deadline bands, decisions pulled, ledger status, and how many items need a human. |
 

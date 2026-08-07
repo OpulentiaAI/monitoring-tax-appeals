@@ -1,6 +1,6 @@
 # PTAB surfaces
 
-Every endpoint the skill reads, verified against `ptab.illinois.gov` on 2026-08-05. All of it is public and answers plain GETs — no login, no session, no form driving. Re-verify this file when a sweep fails identically across watches; that is cheaper than re-deriving the shapes every run.
+Every endpoint the skill reads, verified against `ptab.illinois.gov` on 2026-08-05. All of it is public: no login, no form driving, every page addressable by URL. Read it through the browser session — see [Acquisition](#acquisition). Re-verify this file when a sweep fails identically across watches; that is cheaper than re-deriving the shapes every run.
 
 ## The map
 
@@ -92,21 +92,46 @@ https://ptab.illinois.gov/web/Decisions/{YYYY}/{FULL-DOCKET}.pdf
 
 `{YYYY}` is the docket's four-digit year, not the decision year. Verified: `/web/Decisions/2004/2004-01668.pdf` → 200, `application/pdf`, ~59 KB.
 
-Fetch once, store under `decisions/`, record byte size and SHA-256 in the matter record. A signed decision does not change — re-fetching it is waste, and a hash mismatch on a re-fetch is worth surfacing rather than overwriting.
+**Take the PDF as a download, and prefer the link over the pattern.** On a closed case the close row on `property.asp` carries an inline link to the decision. Click that link, let the download land in the session, then pull the bytes with `get_downloads` and write them to `decisions/{docket}.pdf`. The URL pattern above is the fallback for when the inline link is missing: `navigate` to it and the same download path applies.
 
-A 404 on a closed case means the decision is not posted yet. Record `decision_pdf: null` and let the next sweep find it. Never present a constructed URL as evidence a decision exists.
+The difference matters because a constructed URL that happens to 404 and a decision that genuinely is not posted yet look identical from the outside. The link is the site telling you the decision exists. The pattern is you guessing.
+
+Record byte size and SHA-256 in the matter record, computed from the file on disk after the download completes. Verify the content type is `application/pdf` before hashing — an interstitial or an error page saved under a `.pdf` name hashes perfectly well and is worthless.
+
+Once, ever. A signed decision does not change, so a second download is waste and a hash mismatch on one is worth surfacing rather than overwriting.
+
+A 404 or a missing link on a closed case means the decision is not posted yet. Record `decision_pdf: null` and let the next sweep find it.
 
 ## PIN lookup
 
 `/asi/PropertyPIN.asp?PropPin={PIN}` returns `PIN # | Docket No | Last Name` — every filing against that parcel across tax years. This is the watch that catches a matter filed by someone else on a property you track.
 
+## Acquisition
+
+Every page and every PDF comes through the browser session. `browser_manage` is the surface:
+
+| Step | Action |
+|---|---|
+| Open the sweep | `start` — one session for the whole sweep |
+| Load a page | `navigate` to the URL from `ptab_urls.mjs` |
+| Take the HTML | `get_content`, written straight to `snapshots/{date}/raw/` |
+| Page forward | `click` the `Next Page` control |
+| Take a decision | `click` the inline decision link, then `get_downloads` |
+| Prove a surface | `screenshot` |
+| Close the sweep | end the session, including on the failure path |
+
+Chain `navigate` and `get_content` in one `batch` call per page. One page is one round-trip, and the budget in `workflow.md` counts it that way.
+
+Why the browser rather than a plain GET. The PDFs are the reason: a decision arrives as a download, and the session's download bucket is the surface that hands you the bytes with their real content type. The list pages come along for the ride, and taking them the same way means the sweep holds one session, one cookie jar, and one place to look when a page comes back wrong. The `screenshot` action is also what makes a parse failure diagnosable a week later.
+
+One session, reused across every request, released when the sweep ends. The concurrency here is 1 by design, because the pacing below is the point.
+
 ## Rate and access discipline
 
 - Public state service. Sequential requests, ~2–3 seconds apart, one sweep per week.
-- Stop on the first 5xx or interstitial rather than retrying into it. Report the partial sweep.
-- Cache raw HTML under `snapshots/{date}/raw/`. Re-parse freely; re-fetch never.
-- The site is plain server-rendered HTML, so a fetch is correct. A browser session buys nothing here and costs a concurrency slot.
-- **The eFiling portal is not a surface.** Attorney-represented appeals have gone through it since 2023-07-01, it is credentialed and captcha-protected, and this skill has no business there.
+- Stop on the first 5xx or interstitial rather than retrying into it. End the session and report the partial sweep.
+- Cache raw HTML under `snapshots/{date}/raw/` and PDFs under `decisions/`. Re-parse freely; re-fetch never.
+- **The eFiling portal is not a surface.** Attorney-represented appeals have gone through it since 2023-07-01, it is credentialed and captcha-protected, and this skill has no business there. A browser session makes that boundary easier to cross by accident, so it is an invariant rather than a preference.
 
 ## Related sources
 
