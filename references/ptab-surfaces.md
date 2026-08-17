@@ -30,7 +30,7 @@ All eight parameters are always present; empty ones are omitted from matching. `
 
 **Empty result**: the page renders `No records found!` with a Back to Search link. That is a valid response, not an error — the most common causes are an over-narrow township, a tax year before 1999 (ASI's data floor), or a county spelling mismatch.
 
-**Docket number has two forms.** Result links use `property.asp?docketno=04-01668` (two-digit year); the page displays `2004-01668`; `PropertyDetails.asp` wants the full form with a sub-index, `2004-01668-001`. `ptab_urls.mjs` normalizes between them — do not do it by hand.
+**Docket number has three forms.** Result links use `property.asp?docketno=04-01668` (two-digit year); the page displays `2004-01668`; `PropertyDetails.asp` wants the full form with a sub-index, `2004-01668-001`. `ptab_urls.mjs` normalizes between them — do not do it by hand.
 
 ## Docket lookup
 
